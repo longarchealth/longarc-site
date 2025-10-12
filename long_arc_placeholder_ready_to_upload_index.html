@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LongArc Health — Coming Soon</title>
+    <meta name="description" content="Evidence-based lifestyle and longevity medicine. LongArc Health — Health isn’t a moment. It’s a trajectory." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind Play CDN (no build step needed) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: { sans: ["Inter", "ui-sans-serif", "system-ui"] },
+          },
+        },
+      };
+    </script>
+
+    <!-- React 18 UMD + Babel (so we can write TSX/JSX inline and ship 1 file) -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+      html, body, #root { height: 100%; }
+      body { background: #F6F4F1; }
+    </style>
+  </head>
+  <body class="antialiased text-slate-900">
+    <div id="root"></div>
+
+    <script type="text/babel" data-presets="typescript,react">
+      // @ts-nocheck
+      function LongArcPlaceholder() {
+        const palette = {
+          white: "#F6F4F1",
+          blueDark: "#2F637A",
+          blueMuted: "#6F97A1",
+          gray: "#75787B",
+          orange: "#B65A32",
+        };
+
+        return (
+          <div className="min-h-screen text-slate-900 antialiased" style={{ backgroundColor: palette.white }}>
+            {/* Background arc motif */}
+            <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+              <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg" className="absolute -top-40 left-1/2 h-[1200px] w-[1200px] -translate-x-1/2 opacity-[0.07]" aria-hidden="true">
+                {Array.from({ length: 6 }).map((_, i) => (
+                  <path key={i} d={`M ${100 + i * 40},700 C 600,${300 - i * 20} 600,${300 - i * 20} 1100,700`} fill="none" stroke={palette.blueMuted} strokeWidth={2 + i * 1.2} />
+                ))}
+              </svg>
+            </div>
+
+            {/* Top nav */}
+            <header className="px-6 sm:px-10 py-5">
+              <div className="mx-auto max-w-6xl flex items-center justify-between">
+                <a href="#home" className="group inline-flex items-center gap-3">
+                  <svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="shrink-0 w-[3.75rem] h-[3.75rem] sm:w-[4.5rem] sm:h-[4.5rem] md:w-[5.25rem] md:h-[5.25rem]">
+                    <path d="M4 20c0-6.627 4.373-12 10-12s10 5.373 10 12" fill="none" stroke={palette.blueDark} strokeWidth="2.5" strokeLinecap="round" />
+                  </svg>
+                  <span className="text-5xl sm:text-6xl font-semibold tracking-tight">LongArc Health</span>
+                </a>
+                <nav className="hidden sm:flex items-center gap-6 text-xl opacity-80">
+                  <a href="mailto:team@longarchealth.com" className="hover:opacity-100 focus:opacity-100">Contact</a>
+                </nav>
+              </div>
+            </header>
+
+            {/* Hero */}
+            <main id="home" className="px-6 sm:px-10">
+              <section className="mx-auto max-w-5xl pt-8 sm:pt-16 pb-10 text-center">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight whitespace-normal sm:whitespace-nowrap" style={{ color: palette.orange }}>
+                  Evidence-based lifestyle and longevity medicine.
+                </h1>
+
+                <div className="mt-6 flex items-center justify-center">
+                  <span className="select-none text-2xl opacity-50">⸻</span>
+                </div>
+
+                <p className="mx-auto mt-6 max-w-3xl text-lg sm:text-xl leading-relaxed opacity-90">
+                  Extend the arc of your vitality through root-cause, physician-led care that blends science, systems thinking, and human connection.
+                </p>
+
+                <p className="mx-auto mt-6 max-w-2xl italic text-base sm:text-lg opacity-95">
+                  Health isn’t a moment. It’s a trajectory.
+                </p>
+
+                {/* Waitlist / CTA */}
+                <div className="mx-auto mt-10 max-w-xl">
+                  <form className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center" method="POST" action="#" onSubmit={(e) => { e.preventDefault(); alert("Thanks! We'll be in touch soon."); }}>
+                    <label htmlFor="email" className="sr-only">Email</label>
+                    <input id="email" type="email" required placeholder="you@example.com" className="flex-1 rounded-2xl border px-4 py-3 text-base shadow-sm outline-none transition" style={{ backgroundColor: "#FFFFFF", borderColor: palette.gray + "80" }}
+                      onFocus={(e) => { e.currentTarget.style.borderColor = palette.blueDark; e.currentTarget.style.boxShadow = `0 0 0 6px ${palette.blueMuted}33`; }}
+                      onBlur={(e) => { e.currentTarget.style.borderColor = palette.gray + "80"; e.currentTarget.style.boxShadow = "none"; }}
+                    />
+                    <button type="submit" className="rounded-2xl px-5 py-3 text-base font-semibold shadow-sm" style={{ backgroundColor: palette.blueDark, color: "white", boxShadow: `0 1px 2px 0 rgb(0 0 0 / 0.05)` }}>
+                      Join the waitlist
+                    </button>
+                  </form>
+                  <p className="mt-3 text-xs opacity-70">No spam. Just launch updates and early access invites.</p>
+                </div>
+              </section>
+
+              {/* Contact / Footer */}
+              <section id="contact" className="mx-auto max-w-6xl">
+                <div className="mt-14 flex flex-col items-center gap-3 text-center">
+                  <p className="text-sm opacity-80">Questions or collaborations?</p>
+                  <a href="mailto:team@longarchealth.com" className="text-base font-medium underline underline-offset-4 hover:decoration-2" style={{ textDecorationColor: palette.blueMuted }}>
+                    team@longarchealth.com
+                  </a>
+                </div>
+
+                <footer className="mt-12 mb-10 flex flex-col gap-2 items-center justify-center text-xs opacity-70">
+                  <div className="flex items-center gap-2">
+                    <span>© {new Date().getFullYear()} LongArc Health</span>
+                    <span>— Care provided by LongArc Medicine PLLC.</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span>Phoenix, Arizona</span>
+                  </div>
+                </footer>
+              </section>
+            </main>
+          </div>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<LongArcPlaceholder />);
+    </script>
+  </body>
+</html>
